@@ -9,7 +9,7 @@ class queue
 {
     public:
         virtual bool isEmpty() const = 0;
-        virtual void enQueue(const elemType& x) const = 0;
+        virtual void enQueue(const elemType& x) = 0;
         virtual elemType deQueue() = 0;
         virtual elemType getHead() const = 0;
         virtual ~queue(){}
@@ -63,7 +63,7 @@ elemType seqQueue<elemType>::deQueue()
 template<class elemType>
 elemType seqQueue<elemType>::getHead() const
 {
-    return elem(front +1) % maxSize;
+    return elem[(front +1) % maxSize];
 }
 
 template<class elemType>
@@ -79,7 +79,7 @@ void seqQueue<elemType>::doubleSpace()
 {
     elemType *tmp = elem;
     elem = new elemType[2 * maxSize];
-    for(int i = 1; i < maxSize; ++1) elem[i] = tmp[(front + i) % maxSize];
+    for(int i = 1; i < maxSize; ++i) elem[i] = tmp[(front + i) % maxSize];
     front = 0;
     rear = maxSize -1;
     maxSize *= 2;
