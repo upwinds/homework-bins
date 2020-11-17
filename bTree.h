@@ -411,13 +411,12 @@ void forest<elemType>::levelOrder() const
 template<class elemType>
 int forest<elemType>::find(elemType x) const
 {
-    seqQueue<Node *> roots;
-    seqQueue<int> tree_number;
     Node *tmp = root;
     int i=1;
     while(tmp)
-    {
-        if(find(x,tmp)) return i;
+    {   
+        if (tmp->data == x) return i;
+        if(find(x,tmp->left)) return i;
         else tmp = tmp->right;
         ++i;
     }
